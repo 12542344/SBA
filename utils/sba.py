@@ -317,21 +317,21 @@ def isFracture(HA, HM, HP):
 
     R = Hmin / Hmax 
     L = 1 - R
-    if L <= 0.2:
+    if L < 0.2:
         G = 0 # Grade 0 / Normal
-    elif L > 0.2 and L <= 0.25:
+    elif L >= 0.2 and L < 0.25:
         G = 1 # Grade 1 / Mild
-    elif L > 0.25 and L <= 0.40:
+    elif L >= 0.25 and L < 0.40:
         G = 2 # Grade 2 / Moderate
-    elif L > 0.40:
+    elif L >= 0.40:
         G = 3 # Grade 3 / Severe
 
     if HA > HM and HP > HM:
         C = 3 # Crush
     elif HP > HM and HM > HA:
-        C = 1 # Bi-concave
+        C = 2 # Bi-concave
     else: 
-        C = 2 # Wedge
+        C = 1 # Wedge
 
     return L, G, C
 
