@@ -54,10 +54,12 @@ def filter_mask_binary(mask, method = "AREA"):
     _, out = cv2.threshold(out,127,255,cv2.THRESH_BINARY)
     return out
 
-def findCentroid(contour):
-    M = cv2.moments(contour)
-    if M["m00"] != 0: cx, cy = get_center_of_half_area_line(contour)
-    else: cx, cy = 0, 0
+def findCentroid(contour, method = "MASS"):
+    try:
+        if method == "MASS": cx, cy = get_center_of_mass(contour)  
+        elif method == "HALF_AREA_LINE": cx, cy = get_center_of_half_area_line(contour)
+    except: 
+        cx, cy = 0, 0
     return [int(cx), int(cy)]
 
 def pointLocationInContour(point, contour):
